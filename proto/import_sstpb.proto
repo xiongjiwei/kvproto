@@ -226,7 +226,13 @@ message Pair {
 
 message WriteBatchRequest {
     uint64 commit_ts = 1;
-    repeated Pair pairs = 2;
+    enum OP {
+        Put = 0;
+        Delete = 1;
+    }
+    repeated OP op = 2;
+    repeated bytes key = 3;
+    repeated bytes value = 4;
 }
 
 message WriteMetaRequest {
