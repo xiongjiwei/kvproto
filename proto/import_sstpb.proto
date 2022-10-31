@@ -47,7 +47,8 @@ service ImportSST {
     rpc Download(DownloadRequest) returns (DownloadResponse) {}
 
     // Open a write stream to generate sst files
-    rpc Write(stream WriteRequest) returns (WriteResponse) {}
+    rpc WriteBatch(stream WriteBatchRequest) returns (WriteResponse) {}
+    rpc WriteMeta(stream WriteMetaRequest) returns (WriteResponse) {}
     rpc RawWrite(stream RawWriteRequest) returns (RawWriteResponse) {}
 
     // Ingest Multiple files in one request
@@ -223,16 +224,13 @@ message Pair {
     OP op = 3;
 }
 
-message WriteBatch {
+message WriteBatchRequest {
     uint64 commit_ts = 1;
     repeated Pair pairs = 2;
 }
 
-message WriteRequest {
-    oneof chunk {
-        SSTMeta meta = 1;
-        WriteBatch batch = 2;
-    }
+message WriteMetaRequest {
+    SSTMeta meta = 1;
 }
 
 message WriteResponse {
