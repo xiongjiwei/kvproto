@@ -229,10 +229,16 @@ message WriteBatch {
 }
 
 message WriteRequest {
-    oneof chunk {
-        SSTMeta meta = 1;
-        WriteBatch batch = 2;
+    uint64 commit_ts = 1;
+    enum OP {
+        Put = 0;
+        Delete = 1;
     }
+    repeated OP op = 2;
+    repeated bytes key = 3;
+    repeated bytes value = 4;
+
+    SSTMeta meta = 5;
 }
 
 message WriteResponse {
