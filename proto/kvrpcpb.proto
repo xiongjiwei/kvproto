@@ -787,7 +787,7 @@ message Context {
     // This field can be set for any requests that require to report metrics with any extra labels.
     string request_source = 24;
     
-    // The source of the current txn
+    // The source of the current transaction.
     uint32 txn_source = 25;
 }
 
