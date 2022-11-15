@@ -1151,6 +1151,7 @@ message MvccWrite {
     uint64 gc_fence = 7;
     uint64 last_change_ts = 8;
     uint64 versions_to_last_change = 9;
+    uint32 txn_source = 10;
 }
 
 message MvccValue {
@@ -1171,6 +1172,7 @@ message MvccLock {
     repeated uint64 rollback_ts = 10;
     uint64 last_change_ts = 11;
     uint64 versions_to_last_change = 12;
+    uint32 txn_source = 13;
 }
 
 message MvccInfo {
