@@ -87,6 +87,7 @@ message Event {
         // and represents the expiration time of this row.
         // Absolute time, seconds since Unix epoch.
         uint64 expire_ts_unix_secs = 8;
+        uint32 txn_source = 9;
     }
 
     message Entries {
