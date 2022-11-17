@@ -87,6 +87,7 @@ message Event {
         // and represents the expiration time of this row.
         // Absolute time, seconds since Unix epoch.
         uint64 expire_ts_unix_secs = 8;
+        // The source of this row.
         uint64 txn_source = 9;
     }
 
@@ -165,6 +166,7 @@ message ChangeDataRequest {
     }
 
     KvAPI kv_api = 11;
+    // Whether to filter out the value write by cdc itself.
     bool filter_loop = 12;
 }
 

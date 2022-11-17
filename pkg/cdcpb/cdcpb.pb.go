@@ -711,7 +711,8 @@ type Event_Row struct {
 	// expire_ts_unix_secs is used for RawKV (see `ChangeDataRequest.KvApi`),
 	// and represents the expiration time of this row.
 	// Absolute time, seconds since Unix epoch.
-	ExpireTsUnixSecs     uint64   `protobuf:"varint,8,opt,name=expire_ts_unix_secs,json=expireTsUnixSecs,proto3" json:"expire_ts_unix_secs,omitempty"`
+	ExpireTsUnixSecs uint64 `protobuf:"varint,8,opt,name=expire_ts_unix_secs,json=expireTsUnixSecs,proto3" json:"expire_ts_unix_secs,omitempty"`
+	// The source of this row.
 	TxnSource            uint64   `protobuf:"varint,9,opt,name=txn_source,json=txnSource,proto3" json:"txn_source,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -1086,12 +1087,13 @@ type ChangeDataRequest struct {
 	// Types that are valid to be assigned to Request:
 	//	*ChangeDataRequest_Register_
 	//	*ChangeDataRequest_NotifyTxnStatus_
-	Request              isChangeDataRequest_Request `protobuf_oneof:"request"`
-	KvApi                ChangeDataRequest_KvAPI     `protobuf:"varint,11,opt,name=kv_api,json=kvApi,proto3,enum=cdcpb.ChangeDataRequest_KvAPI" json:"kv_api,omitempty"`
-	FilterLoop           bool                        `protobuf:"varint,12,opt,name=filter_loop,json=filterLoop,proto3" json:"filter_loop,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}                    `json:"-"`
-	XXX_unrecognized     []byte                      `json:"-"`
-	XXX_sizecache        int32                       `json:"-"`
+	Request isChangeDataRequest_Request `protobuf_oneof:"request"`
+	KvApi   ChangeDataRequest_KvAPI     `protobuf:"varint,11,opt,name=kv_api,json=kvApi,proto3,enum=cdcpb.ChangeDataRequest_KvAPI" json:"kv_api,omitempty"`
+	// Whether to filter out the value write by cdc itself.
+	FilterLoop           bool     `protobuf:"varint,12,opt,name=filter_loop,json=filterLoop,proto3" json:"filter_loop,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *ChangeDataRequest) Reset()         { *m = ChangeDataRequest{} }
